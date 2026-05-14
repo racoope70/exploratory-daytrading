@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "garch",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -8.03330128976572,
+      "rolling": -7.314050370079375,
+      "garch": -9.392870435838427
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -8.03330128976572,
+    "best_score": -9.392870435838427,
+    "improvement_vs_baseline": 1.3595691460727064,
+    "arch_available": true,
+    "vol_ref": 0.005639721152247288,
+    "vol_gate": 0.017580326300397645,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "AMD",
+  "window": "1000-4500",
+  "window_idx": 3,
+  "prefix": "ppo_AMD_window3",
+  "date_trained_utc": "2026-05-13T19:02:09Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 95924.19,
+    "buy_hold": 89143.31,
+    "sharpe": -0.398689,
+    "drawdown_pct": 10.386773,
+    "executed_trade_count": 96,
+    "threshold_signal_count": 721,
+    "raw_signal_count": 991,
+    "signal_trade_count": 721,
+    "trend_block_count": 216,
+    "action_threshold": 0.1,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.484
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}
