@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "ewm",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -10.81102850664628,
+      "rolling": -10.412218834372144,
+      "garch": -10.742110381166613
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -10.81102850664628,
+    "best_score": -10.81102850664628,
+    "improvement_vs_baseline": 0.0,
+    "arch_available": true,
+    "vol_ref": 0.0024761003728019254,
+    "vol_gate": 0.02642250918290658,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "ORCL",
+  "window": "500-4000",
+  "window_idx": 2,
+  "prefix": "ppo_ORCL_window2",
+  "date_trained_utc": "2026-05-14T00:08:27Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 99266.19,
+    "buy_hold": 96438.75,
+    "sharpe": -0.806492,
+    "drawdown_pct": 1.139629,
+    "executed_trade_count": 89,
+    "threshold_signal_count": 328,
+    "raw_signal_count": 654,
+    "signal_trade_count": 328,
+    "trend_block_count": 316,
+    "action_threshold": 0.05,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.5091
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}
