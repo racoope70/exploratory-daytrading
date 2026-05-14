@@ -1,0 +1,17 @@
+{
+  "features": [
+    "Vol_Forecast",
+    "Vol_EWM",
+    "Vol_Roll",
+    "Vol_GARCH",
+    "Vol_Ref",
+    "Vol_Gate",
+    "Ret_1",
+    "Ret1",
+    "Ret20",
+    "FlipRate20",
+    "Chop",
+    "Denoised_Close",
+    "EMA_50"
+  ]
+}

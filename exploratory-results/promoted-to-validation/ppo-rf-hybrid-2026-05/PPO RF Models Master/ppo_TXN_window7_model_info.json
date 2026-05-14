@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "garch",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -10.158737732420116,
+      "rolling": -9.94931994972367,
+      "garch": -10.272972413560563
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -10.158737732420116,
+    "best_score": -10.272972413560563,
+    "improvement_vs_baseline": 0.11423468114044688,
+    "arch_available": true,
+    "vol_ref": 0.003477342210598052,
+    "vol_gate": 0.03646211884089409,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "TXN",
+  "window": "3000-6500",
+  "window_idx": 7,
+  "prefix": "ppo_TXN_window7",
+  "date_trained_utc": "2026-05-14T03:20:38Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 98366.9,
+    "buy_hold": 103746.01,
+    "sharpe": -0.157281,
+    "drawdown_pct": 11.447066,
+    "executed_trade_count": 85,
+    "threshold_signal_count": 406,
+    "raw_signal_count": 988,
+    "signal_trade_count": 406,
+    "trend_block_count": 314,
+    "action_threshold": 0.05,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.5049
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}
