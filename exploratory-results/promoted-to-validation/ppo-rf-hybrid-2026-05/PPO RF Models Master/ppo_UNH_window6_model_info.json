@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "garch",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -8.689093883300586,
+      "rolling": -8.267066772095287,
+      "garch": -10.1629294500582
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -8.689093883300586,
+    "best_score": -10.1629294500582,
+    "improvement_vs_baseline": 1.4738355667576144,
+    "arch_available": true,
+    "vol_ref": 0.004280901600951622,
+    "vol_gate": 0.00921345113891695,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "UNH",
+  "window": "2500-6000",
+  "window_idx": 6,
+  "prefix": "ppo_UNH_window6",
+  "date_trained_utc": "2026-05-14T14:24:50Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 100949.13,
+    "buy_hold": 94943.42,
+    "sharpe": 0.339017,
+    "drawdown_pct": 3.341586,
+    "executed_trade_count": 74,
+    "threshold_signal_count": 352,
+    "raw_signal_count": 688,
+    "signal_trade_count": 352,
+    "trend_block_count": 520,
+    "action_threshold": 0.05,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.5
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}

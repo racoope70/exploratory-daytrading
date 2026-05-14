@@ -1,0 +1,8 @@
+{
+  "gate_enabled": true,
+  "gate_model_type": "rf",
+  "threshold": 0.4,
+  "label_horizon": 5,
+  "label_return_threshold": 0.005,
+  "uses_scaler": false
+}
