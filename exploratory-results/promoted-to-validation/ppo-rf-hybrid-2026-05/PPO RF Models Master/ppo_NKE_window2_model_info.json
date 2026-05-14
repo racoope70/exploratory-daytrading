@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "garch",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -8.18382317548545,
+      "rolling": -8.039101990346087,
+      "garch": -9.438554142159278
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -8.18382317548545,
+    "best_score": -9.438554142159278,
+    "improvement_vs_baseline": 1.2547309666738276,
+    "arch_available": true,
+    "vol_ref": 0.005132708144533822,
+    "vol_gate": 0.010296871110584095,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "NKE",
+  "window": "500-4000",
+  "window_idx": 2,
+  "prefix": "ppo_NKE_window2",
+  "date_trained_utc": "2026-05-13T22:22:54Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 100267.35,
+    "buy_hold": 97064.21,
+    "sharpe": 0.097789,
+    "drawdown_pct": 5.332204,
+    "executed_trade_count": 91,
+    "threshold_signal_count": 531,
+    "raw_signal_count": 983,
+    "signal_trade_count": 531,
+    "trend_block_count": 264,
+    "action_threshold": 0.1,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.5443
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}

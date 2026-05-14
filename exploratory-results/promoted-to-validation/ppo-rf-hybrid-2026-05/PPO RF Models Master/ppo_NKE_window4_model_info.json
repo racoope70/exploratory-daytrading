@@ -1,0 +1,83 @@
+{
+  "phase4_oos_only": true,
+  "risk_forecast_info": {
+    "enabled": true,
+    "selected_method": "garch",
+    "selection_metric": "qlike",
+    "scores": {
+      "ewm": -9.802245572754927,
+      "rolling": -8.612575533173954,
+      "garch": -10.473247970527195
+    },
+    "score_coverage": {
+      "ewm": 735,
+      "rolling": 735,
+      "garch": 735
+    },
+    "baseline_method": "ewm",
+    "baseline_score": -9.802245572754927,
+    "best_score": -10.473247970527195,
+    "improvement_vs_baseline": 0.6710023977722681,
+    "arch_available": true,
+    "vol_ref": 0.003710358608148767,
+    "vol_gate": 0.01763709856624416,
+    "split_idx": 1715,
+    "selection_end": 2450
+  },
+  "model": "PPO",
+  "ticker": "NKE",
+  "window": "1500-5000",
+  "window_idx": 4,
+  "prefix": "ppo_NKE_window4",
+  "date_trained_utc": "2026-05-13T22:44:16Z",
+  "framework": "stable-baselines3",
+  "device": "cpu",
+  "seed": 42,
+  "timesteps": 150000,
+  "train_rows": 2450,
+  "eval_rows": 1050,
+  "vmd_info": {
+    "enabled": false,
+    "available": false,
+    "source_col": "Denoised_Close",
+    "lookback": 128,
+    "K": 5,
+    "trend_modes": [
+      0,
+      1
+    ],
+    "cycle_modes": [
+      2,
+      3
+    ],
+    "noise_modes": [
+      4
+    ],
+    "selected": false,
+    "candidate_available": false,
+    "selected_feature_source": "BASE"
+  },
+  "metrics": {
+    "final_portfolio": 100599.73,
+    "buy_hold": 99753.15,
+    "sharpe": 0.164359,
+    "drawdown_pct": 4.476984,
+    "executed_trade_count": 86,
+    "threshold_signal_count": 601,
+    "raw_signal_count": 989,
+    "signal_trade_count": 601,
+    "trend_block_count": 314,
+    "action_threshold": 0.1,
+    "action_threshold_mode": "hybrid[0.05,0.10]",
+    "action_threshold_override": null,
+    "accuracy": 0.5025
+  },
+  "trend_filter_info": {
+    "enabled": true,
+    "filter_col": "Trend_Filter",
+    "fast_col": "EMA_50",
+    "slow_col": "EMA_200",
+    "block_shorts_in_uptrend": true,
+    "block_longs_in_downtrend": true
+  }
+}
