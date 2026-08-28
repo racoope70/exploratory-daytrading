@@ -1,5 +1,10 @@
 # Exploratory Day Trading Research
 
+![Status](https://img.shields.io/badge/status-historical%20research-lightgrey)
+![Python](https://img.shields.io/badge/Python-research-blue?logo=python&logoColor=white)
+![Google Colab](https://img.shields.io/badge/Google%20Colab-original%20environment-F9AB00?logo=googlecolab&logoColor=white)
+
+
 > **Status: Historical experimental research workspace**
 
 This repository preserves early-stage quantitative trading research, prototype models, exploratory notebooks, feature-engineering experiments, and selected research outputs. It documents the research path and the evolution of modeling ideas before selected work moved into more structured validation and research platforms.
