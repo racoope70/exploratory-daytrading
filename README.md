@@ -25,6 +25,8 @@ The repository should be read as a historical research workspace, not as a curre
 
 ## Start Here
 
+For a deeper methodology-and-results narrative, see the [Historical Quantitative Research Overview](./Day_Trading_ML_Overview.md).
+
 The repository is iterative rather than perfectly linear. For one evidence-based path through the research, start with these notebooks:
 
 1. [`Feature_Engineering_Trading.ipynb`](./Feature_Engineering_Trading.ipynb) — early single-stock feature engineering and GPU-accelerated Random Forest experimentation, with preserved classification output. The historical accuracy result should be read as an exploratory model result, not as validated trading performance.

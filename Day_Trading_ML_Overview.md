@@ -1,378 +1,173 @@
-> **Status: Exploratory / Archived**
-> This document summarizes exploratory experiments and legacy results. Some metrics/plots are outdated and retained for provenance only.
-> **For deployment-ready models, code, and current results, see:** quant-trading-model-zoo (https://github.com/yourname/quant-trading-model-zoo).
-
-1. [Overview](#overview)  
-2. [Features](#features)  
-3. [Installation](#installation)  
-4. [Project Structure](#project-structure)  
-5. [Usage](#usage)  
-6. [Visualizations & Results](#visualizations--results)  
-7. [Model Performance](#model-performance)  
-8. [Real-World Potential & Tangible Benefits](#real-world-potential--tangible-benefits)  
-9. [Further Innovations & Expansion Plans](#further-innovations--expansion-plans)  
-10. [License](#license)  
-11. [Acknowledgments](#acknowledgments)
-
----
-
-## Overview  
-This project explores the use of **machine learning**, **reinforcement learning**, and **anomaly detection** to generate and evaluate algorithmic trading strategies on hourly stock data.
-
-The pipeline supports data download, feature engineering, multi-window walkforward validation, model saving, and performance visualization across 50+ tickers.
-
-> **Work in Progress**: This repository is under active development and continues to be updated with additional models, cleaner integration, and improved signal logic.
-
----
-
-## Features  
-- **Stock Data Collection**  
-  - Pulls 1-hour interval stock data using `yfinance` (720-day limit).
-- **Feature Engineering**  
-  - Adds indicators like RSI, MACD, Bollinger Bands, SMA, EMA, and custom log-return + momentum lags.
-- **Labeling Framework**  
-  - Supports classification (up/down/flat via quantiles) and regression (log-return prediction).
-- **Walkforward Training & Testing**  
-  - Uses true date-based rolling or expanding windows for realistic performance evaluation.
-- **Model Coverage**  
-  - Includes XGBoost, LightGBM, Random Forest, Isolation Forest, AutoEncoder, KMeans, and deep RL agents (PPO, SAC, DQN, TD3, A2C).
-- **Evaluation Metrics**  
-  - Reports Sharpe, Accuracy, Max Drawdown, Final Portfolio Value, and Cumulative Return.
-
----
-
-## Installation  
-1. **Clone the Repository**  
-   ```bash
-   git clone https://github.com/racoope70/daytrading-with-ml.git
-   ```
-
-2. **Navigate to the Project Directory**  
-   ```bash
-   cd daytrading-with-ml
-   ```
-
-3. **Install Dependencies**  
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-Ensure Python 3.8+ is installed. GPU recommended for reinforcement learning training.
-
----
-
-## Project Structure  
-
-```
-daytrading-with-ml/
-├── data/                          
-├── download/                      
-│   ├── download_hourly_data.py
-├── features/                      
-│   ├── feature_engineering.py
-│   ├── calculate_rsi.py
-│   ├── generate_trade_labels.py
-├── enhancements/                 
-│   ├── add_sentiment_scores.py
-│   ├── detect_market_regime.py
-│   ├── apply_denoising.py
-├── models/                        
-│   ├── xgboost_model.py
-│   ├── lightgbm_model.py
-│   ├── rl_models/
-│   ├── rl_envs/
-├── walkforward/                   
-│   ├── train_xgboost_walkforward.py
-│   ├── train_lightgbm_walkforward.py
-│   ├── train_rf_walkforward.py
-│   ├── train_ppo_walkforward.py
-│   ├── train_td3_walkforward.py
-│   ├── train_sac_walkforward.py
-│   ├── train_dqn_walkforward.py
-│   ├── train_a2c_walkforward.py
-│   ├── train_deep_sarsa_walkforward.py
-│   ├── train_kmeans_inference.py
-├── live/
-│   ├── ppo_live_trading_alpaca.py
-│   ├── lightgbm_live_trade.py
-├── utils/                         
-│   ├── plot_portfolio.py
-│   ├── calculate_metrics.py
-├── notebooks/                    
-├── results/                       
-│   ├── metrics/
-│   ├── plots/
-│   ├── models/
-├── requirements.txt               
-├── LICENSE                        
-├── README.md
+# Historical Quantitative Research Overview
 
-```
+> **Status: Historical experimental research**
+>
+> This document summarizes the quantitative trading research preserved in `exploratory-daytrading`. It is a historical research record, not a current system manual, validation certification, profitability claim, or statement of deployment readiness.
 
----
+The repository captures an exploratory research path across supervised machine learning, reinforcement learning, anomaly detection, clustering, model selection, backtesting, and execution-platform integration. The work is intentionally heterogeneous: different notebooks reflect different stages of research maturity, different evaluation designs, and different experimental goals.
 
-## Usage  
+For the repository-level orientation and links to successor projects, see the [README](./README.md).
 
-**Option 1: Notebook Mode**  
-Explore individual models or strategies inside `notebooks/`, e.g., PPO walkforward or KMeans anomaly detection.
+### How to read this overview
 
-**Option 2: Script Mode**
+This document follows the research from early exploratory modeling through more
+structured evaluation, reinforcement-learning experiments, and execution
+prototypes. Readers looking for repository navigation should start with the
+README; this overview focuses on methodology, representative results, and the
+lessons that shaped the later research platforms.
 
-1. **Download Data**
-   ```bash
-   python download/download_hourly_data.py
-   ```
+## 1. Historical Research Overview
 
-2. **Generate Features**
-   ```bash
-   python features/feature_engineering.py
-   ```
+The research began with feature engineering and supervised classification on hourly equity data, then expanded into multi-stock experiments, chronological testing, rolling date-window studies, anomaly detection, clustering, cross-model comparison, reinforcement learning, and execution-platform prototypes.
 
-3. **Train Models**
-   ```bash
-   python walkforward/train_xgboost_walkforward.py
-   --test_mode flag or set test_mode=True in config for lightweight testing.
-   ```
+Much of the work used public market data downloaded with `yfinance`, including 1-hour bars and multi-ticker datasets. Feature sets included combinations of moving averages, volatility measures, Bollinger-style bands, RSI, MACD, stochastic indicators, OBV, CCI, rate-of-change features, and other price-derived signals. The archive also contains explicit attempts to remove known leakage-style signal columns from feature sets during early experimentation.
 
-4. **Visualize Results**
-   ```bash
-   python utils/plot_portfolio.py
-   ```
+The research later broadened beyond classical ML to include Random Forest, XGBoost, LightGBM, KMeans, Isolation Forest, One-Class SVM, autoencoders, PPO, SAC, TD3, A2C, DQN, and related experimental variants. These models were not evaluated under one uniform protocol, so their preserved results should be read within the methodology of the notebook that produced them.
 
----
+## 2. Research Progression
 
-## Visualizations & Results  
+### Early feature engineering and supervised ML
 
-Sharpe Ratio Distribution per Model
-![image](https://github.com/user-attachments/assets/ff63c961-c454-468f-909c-79abd30e6743)
+[`Feature_Engineering_Trading.ipynb`](./Feature_Engineering_Trading.ipynb) represents an early single-stock research stage. It builds technical features, removes several explicitly identified leakage columns, and tests Random Forest classification. The notebook contains more than one evaluation approach: one stage uses a chronological 70/30 split, while a later cuML Random Forest stage uses a random train/test split.
 
-Top 5 and Bottom 5 Models by Average Score
-![image](https://github.com/user-attachments/assets/e169f466-254a-4074-bbe5-b34689d8ed85)
+[`Multi_Stock_Feature_Engineering_Trading.ipynb`](./Multi_Stock_Feature_Engineering_Trading.ipynb) extends the same general feature-engineering approach to a multi-stock dataset and continues Random Forest experimentation using a random train/test split.
 
-Buy/Sell Signal Overlay on Price Chart
-![image](https://github.com/user-attachments/assets/5648e09e-8ee9-4b37-8cd0-26ca99173ec1)
+### Multi-stock classical ML and chronological testing
 
-MSFT Price with Autoencoder Anomalies
-![43fa4d32-ecb2-43aa-8998-dc06314b201e](https://github.com/user-attachments/assets/1dd9060c-aa5b-4c28-ad4d-d3bdba7e0a26)
+The archive then moves toward larger multi-ticker studies and time-aware evaluation. [`multi_ticker_LightGBN_walkforward.ipynb`](./multi_ticker_LightGBN_walkforward.ipynb) evaluates LightGBM across a 53-ticker universe using a chronological split with `shuffle=False`. Despite the historical filename, the preserved training cell is a fixed chronological 80/20 train/test experiment rather than a repeated rolling walk-forward procedure.
 
-AAPL Price with Autoencoder Anomalies
-![da11a34a-f58f-4e4b-a955-d90bb0d6d5f5](https://github.com/user-attachments/assets/589c6422-8fac-4798-ae16-48202c232d29)
+[`multi_stock_XGBoost_rf_walkforward.ipynb`](./multi_stock_XGBoost_rf_walkforward.ipynb) similarly uses explicit calendar periods, including a 2022 training interval and a 2023 testing interval for Random Forest and XGBoost experiments. This marks a clear shift from random splitting toward date-based evaluation.
 
-TSLA Price with Autoencoder Anomalies
-![64b4dec4-f24c-4868-8e57-e91c55c195e9](https://github.com/user-attachments/assets/8463ecbc-f12d-4306-ac0f-604caefb616f)
+### Rolling date-window experimentation
 
+[`XGBoost_rf_walkforward_results_v3.ipynb`](./XGBoost_rf_walkforward_results_v3.ipynb) contains a genuine rolling date-window implementation. Its window generator advances through approximately 365-day training periods, 60-day test periods, and 60-day steps. This is stronger evidence of repeated chronological experimentation than the earlier fixed-split notebooks.
 
----
+The same notebook also preserves an important research limitation: a later portfolio-simulation stage explicitly replaces model signals with randomly generated signals under a `TEMP DEBUG ONLY` comment. The rolling-window model accuracy output remains useful historical evidence, but portfolio, Sharpe, or drawdown values produced after that signal substitution should not be attributed to the trained model.
 
-## Model Performance  
-**Initial Baseline Results (Pre-Enhancement)**:
-Models were originally tested without execution modeling, slippage, regime detection, or noise filtering. These early results served as a performance baseline.
+### Broader research surfaces
 
-**Training Accuracy (~85–89%)**  
-Based on LightGBM in-sample performance across rolling windows.
+The repository subsequently expands into anomaly detection, clustering, cross-model selection, reinforcement learning, and execution-oriented prototypes. This progression is visible across notebooks such as [`multi_stock_anomaly_pipeline.ipynb`](./multi_stock_anomaly_pipeline.ipynb), [`multi_stock_kmeans_trading_strategy.ipynb`](./multi_stock_kmeans_trading_strategy.ipynb), [`Model_Selector_v1.ipynb`](./Model_Selector_v1.ipynb), [`multi_stock_ppo_training_walkforward.ipynb`](./multi_stock_ppo_training_walkforward.ipynb), [`multistock_td3_results.ipynb`](./multistock_td3_results.ipynb), and [`PPO_Quantconnect_Converted_.ipynb`](./PPO_Quantconnect_Converted_.ipynb).
 
-**Test Accuracy (Walkforward ~47–50%)**  
-Out-of-sample validation using true date-based walkforward.
+## 3. Evaluation Methodology
 
-**Sharpe Ratio (~0.55 – 0.64)**  
-QuantConnect hourly tests show realistic, moderate returns.
+The repository does not use one repository-wide validation design. Several distinct methodologies are preserved:
 
-**Max Drawdown (~3.7% – 15.5%)**  
-Controlled with stop-loss, volatility filters, and position sizing.
+| Evaluation type | Historical example | Interpretation |
+|---|---|---|
+| Random train/test split | `Feature_Engineering_Trading.ipynb`, `Multi_Stock_Feature_Engineering_Trading.ipynb` | Early exploratory supervised-ML evaluation. |
+| Fixed chronological split | `multi_ticker_LightGBN_walkforward.ipynb` | Train precedes test in time, but the displayed experiment is a single chronological holdout rather than repeated rolling windows. |
+| Fixed date-based train/test | `multi_stock_XGBoost_rf_walkforward.ipynb` | Explicit calendar training and testing periods, including 2022 train / 2023 test experiments. |
+| Rolling date-window experiment | `XGBoost_rf_walkforward_results_v3.ipynb` | Repeated chronological train/test windows with advancing dates. |
+| Repeated-window RL with same-window evaluation | `multi_stock_ppo_training_walkforward.ipynb` | PPO is trained and then evaluated within the same historical data window. |
+| Separate chronological RL train/test | `multistock_td3_results.ipynb` | Distinct chronological training and testing datasets/environments. |
+| Execution/backtest experiment | `PPO_Quantconnect_Converted_.ipynb` and related integration notebooks | Tests signal handling, execution assumptions, and platform integration rather than model-training validity. |
 
-**Final Portfolio Return (+20% to +58%)**  
-Year-long backtests: BRK‑B (+58.7%), PG (+31%), ABT (+27.8%).
+Because these designs answer different questions, their metrics are not combined here into a single leaderboard. A high classification accuracy from a random split, for example, is not directly comparable with a chronological trading return, a same-window RL result, or an execution-platform backtest.
 
-## Additional Models (Preliminary Results)
+## 4. Representative Historical Results
 
-These models are currently being tested—results below are **early estimates**, pending full backtesting.
+The following results are retained because they help explain the research progression. They are not presented as current validated performance claims.
 
-- **XGBoost**  
-  - Training Accuracy: ~86–88%  
-  - Preliminary Sharpe: ~0.50–0.60
+| Research stage | Preserved result | Methodological context |
+|---|---|---|
+| Early Random Forest feature work | Approximately **99.1% classification accuracy** in a preserved cuML Random Forest run | Random train/test split in a later stage of `Feature_Engineering_Trading.ipynb`; useful as evidence of the early exploratory stage, not as trading-performance evidence. |
+| Multi-ticker LightGBM | Test accuracy generally clustered near **50%** across the 53-ticker experiment | Fixed chronological 80/20 split with `shuffle=False`; not a repeated rolling validation result. |
+| Date-based RF/XGBoost | Preserved 2022 training / 2023 testing experiments | Fixed chronological calendar split; illustrates the move toward explicit temporal separation. |
+| Repeated-window PPO | PPO beat buy-and-hold in **43 of 212 windows (20.28%)** | Repeated-window experiment across 53 tickers; the agent was trained and evaluated within the same historical window. |
+| Single-ticker SAC/PPO comparison | SAC: **-12.48% cumulative return, 0.08 Sharpe, 64.38% max drawdown**. PPO: **44.64% cumulative return, 0.22 Sharpe, 37.60% max drawdown** | Preserved exploratory comparison from `aapl_sac_vs_ppo_training_v1.ipynb`; the result illustrates materially different outcomes within RL research rather than a general model ranking. |
+| Historical model selector | Random Forest selected for **44 tickers** and PPO for **9 tickers** in the preserved selector output | Composite score combining historical PPO, RF, and KMeans result files; exploratory selector logic rather than a current selection protocol. |
 
-- **Random Forest**  
-  - Training Accuracy: ~80–85%  
-  - Expected Sharpe: ~0.45–0.55
+Earlier versions of this overview also included legacy LightGBM and XGBoost headline tables. Because the exact source outputs for those values are not uniquely traceable within the current archive, the tables are not reproduced here.
 
-- **Reinforcement Learning (PPO, SAC, TD3, A2C, DQN, Deep SARSA)**  
-  - Preliminary results pending; initial runs suggest **variable Sharpe (~0.3–0.6)** and high volatility.
+## 5. Anomaly Detection and Model Selection
 
-- **K‑Means Clustering**  
-  - Used for regime detection; early signal analysis suggests moderate predictive value, but full integration still underway.
+### Anomaly detection and clustering
 
-**Back Testing**: 
-Only XGBoost and LightGBM were backtested under the initial setup. All other models (e.g., PPO, SAC, TD3) were evaluated after enhancements were added.
+[`multi_stock_anomaly_pipeline.ipynb`](./multi_stock_anomaly_pipeline.ipynb) explores several unsupervised and semi-supervised approaches, including Isolation Forest, One-Class SVM, a PyTorch autoencoder, PCA, t-SNE, and UMAP. The notebook evaluates anomaly-style behavior on AAPL, TSLA, and MSFT using market-derived features such as RSI, MACD, and OBV.
 
-**Backtest Summary by Model**
-## Baseline Backtests (XGBoost + LightGBM Only)
+One representative autoencoder output is retained below because it illustrates this research stage directly.
 
-### LightGBM Walkforward Results Metrics (Pre-Backtest, Google Colab)
+**Figure 1. AAPL price with autoencoder anomalies.** Historical anomaly-detection visualization produced during the multi-stock anomaly research stage; it is an exploratory diagnostic, not a trading-performance result.
 
+![AAPL Price with Autoencoder Anomalies](https://github.com/user-attachments/assets/589c6422-8fac-4798-ae16-48202c232d29)
 
-| Ticker | Final_Portfolio | Return_% | Sharpe | Accuracy | F1_Score    | Drawdown  |
-|--------|----------------:|---------:|--------:|----------:|----------:|----------:|
-| ABt    | 127,777.29      | 27.78    | 0.6350  | 0.497     | 0.2728    |  8.91%    |
-| BRK-B  | 158,738.56      | 58.74    | 0.5529  | 0.491     | 0.3415    | 15.48%    |
-| PG     | 131,011.66      | 31.01    | 0.5670  | 0.5043    | 0.2103    |  6.79%    |
+[`multi_stock_kmeans_trading_strategy.ipynb`](./multi_stock_kmeans_trading_strategy.ipynb) applies KMeans to standardized market features and maps cluster behavior into Buy/Hold/Sell-style interpretations using forward returns. The preserved evidence supports describing KMeans as an exploratory clustering and signal/regime research surface; it does not establish a general predictive-performance claim.
 
+### Cross-model selection
 
-**LightGBM Plots**
-![BRK-B_portfolio_plot](https://github.com/user-attachments/assets/6e104d70-8306-4841-8ffa-48ad4d2b6db3)
-![PG_portfolio_plot](https://github.com/user-attachments/assets/c9052786-2e3f-4ba5-9908-eeadbd9a110c)
-![ABT_portfolio_plot](https://github.com/user-attachments/assets/0a7e9468-c300-4a49-ba32-efb46652a066)
+[`Model_Selector_v1.ipynb`](./Model_Selector_v1.ipynb) combines historical PPO, Random Forest, and KMeans result files and applies a composite score based on Sharpe, return, and accuracy. Later selector notebooks, including [`Model_Selector_v4.ipynb`](./Model_Selector_v4.ipynb), add more developed scoring and scaling logic.
 
-### ABT Walkforward Backtest (QuantConnect)
+Two preserved figures capture this model-comparison stage:
 
-**Performance Summary:**
+**Figure 2. Sharpe ratio distribution by model.** Historical cross-model comparison visualization. The plotted values come from experiments with different methodologies and should not be interpreted as a single controlled benchmark.
 
-**BRK-B**
-![image](https://github.com/user-attachments/assets/605a8e07-e5dd-433d-ae6e-97cdeedd8365)
+![Sharpe Ratio Distribution per Model](https://github.com/user-attachments/assets/ff63c961-c454-468f-909c-79abd30e6743)
 
-**PG**
-![image](https://github.com/user-attachments/assets/07b965a8-d42c-4c13-831c-0c5e894bb81a)
+**Figure 3. Top and bottom models by average selector score.** Historical selector output based on the scoring framework used in the model-selection notebooks; it is not a current validated model ranking.
 
-**ABT**
-![image](https://github.com/user-attachments/assets/78efc22b-0beb-4981-826e-3ac8c3ae8515)
+![Top 5 and Bottom 5 Models by Average Score](https://github.com/user-attachments/assets/e169f466-254a-4074-bbe5-b34689d8ed85)
 
-**Model Risk Disclaimer: Overfitting Flag Contextualized**
-While QuantConnect flags ‘Likely Overfitting’ due to parameter count, this strategy is walkforward-validated, uses simple interpretable features, and applies volatility and probability filters. Real-world constraints (slippage, trade cooldowns) are simulated to reinforce generalization.
+## 6. Reinforcement-Learning Findings
 
-**Stored files:**
-- `lightgbm/models/`
-- `lightgbm/scalers/`
-- `lightgbm/features/`
-- `lightgbm/metrics/lightgbm_walkforward_summary.csv`
-- `lightgbm/plots/`
+Reinforcement learning became a major experimental branch of the repository, with PPO, SAC, TD3, A2C, DQN, and related variants appearing across the archive. The preserved results are mixed rather than uniformly favorable.
 
-**Backtest Method:**  
-Walkforward on 720-day hourly data using QuantConnect-compatible LightGBM with `MinMaxScaler`, technical features, and binary targets.
+The multi-stock PPO experiment in [`multi_stock_ppo_training_walkforward.ipynb`](./multi_stock_ppo_training_walkforward.ipynb) creates four overlapping windows per ticker across 53 tickers, producing 212 evaluated windows. In the preserved run, PPO outperformed buy-and-hold in 43 windows, or 20.28%. This is useful negative evidence: the experiment did not show broad superiority over the benchmark in the recorded windows.
 
+Its methodology also matters. PPO is trained on each historical window and then evaluated in the same environment/window. The result therefore documents repeated-window RL behavior, not a separate out-of-sample test.
 
-### XGBoost Walkforward Results Metrics (Pre-Backtest, Google Colab)
+A separate SAC/PPO comparison preserved in [`aapl_sac_vs_ppo_training_v1.ipynb`](./aapl_sac_vs_ppo_training_v1.ipynb) records a weak SAC outcome and a substantially stronger PPO portfolio outcome, while both runs retain meaningful drawdown. Rather than supporting a general claim that one RL algorithm was superior, the notebook illustrates the instability and sensitivity of exploratory RL results.
 
+Later work demonstrates a different evaluation design. [`multistock_td3_results.ipynb`](./multistock_td3_results.ipynb) separates a chronological training period from a later testing period and constructs distinct training and testing environments. This provides evidence that the RL methodology itself evolved during the project.
 
-| Ticker | Final_Portfolio | Return_% | Sharpe | Accuracy | F1_Score | Drawdown |
-|--------|----------------:|---------:|--------:|----------:|----------:|----------:|
-| AVGO   | 114,043.68      | 14.04    | 1.916   | .1429     | .1451     | 2.81%     |
-| AMD    | 108,788.84     |  8.79    | 1.146   | .2821     | .2784     | 3.86%     |
-| HD     | 1037,11.63      |  3.71    | 1.135   | .3555    | .2362     | 1.97%     |
+## 7. Backtesting, Risk, and Execution Experiments
 
+The archive also contains experiments focused less on model training and more on how signals might behave inside a trading or execution environment.
 
+[`PPO_Quantconnect_Converted_.ipynb`](./PPO_Quantconnect_Converted_.ipynb) is a QuantConnect execution-adapter prototype for externally generated signals. The preserved implementation includes:
 
-### ABT Walkforward Backtest (QuantConnect)
+- external JSON signal consumption;
+- signal freshness checks;
+- confidence-based position sizing;
+- BUY / SELL / HOLD handling;
+- explicit slippage and brokerage assumptions;
+- order-fill and closed-trade tracking;
+- return-history and risk/performance diagnostics.
 
-**Performance Summary:**
+These features show an effort to move from isolated model output toward execution-aware experimentation. They do not establish validated live-trading readiness. The repository also contains Alpaca-oriented paper-trading and integration notebooks that should be read in the same historical prototype context.
 
-**AVGO**
+Earlier strategy notebooks also experimented with trade-signal overlays and rule-based visualization. One representative figure is retained below.
 
-<img width="2148" height="994" alt="image" src="https://github.com/user-attachments/assets/bcfbaa86-7109-4237-b3cc-174708463b56" />
+**Figure 4. Historical buy/sell signal overlay.** Exploratory signal visualization from the strategy-development stage; it demonstrates how signals were inspected against price history rather than establishing profitable execution.
 
+![Buy/Sell Signal Overlay on Price Chart](https://github.com/user-attachments/assets/5648e09e-8ee9-4b37-8cd0-26ca99173ec1)
 
----
+Risk and execution concepts appear throughout later experiments, including stop-loss/take-profit logic, position sizing, volatility filters, slippage assumptions, trade cooldowns, and brokerage/execution constraints. These controls improved the realism of some experiments, but they are implementation choices rather than evidence that generalization or protection against overfitting was established.
 
-<img width="1744" height="1092" alt="image" src="https://github.com/user-attachments/assets/5d7d359c-4e15-4e1e-a2de-efb3ed4587e3" />
+QuantConnect also produced a historical **"Likely Overfitting"** warning in preserved backtest material. That warning remains part of the research record. The presence of filtering, risk controls, or execution assumptions should not be interpreted as resolving the warning by itself.
 
----
+## 8. Limitations and Interpretation
 
+Several limitations are important when reading this repository as a historical research record:
 
-**AMD**
-<img width="2156" height="1040" alt="image" src="https://github.com/user-attachments/assets/c4b44170-b528-4119-92e1-13107a525cb1" />
+- **Evaluation methodology is heterogeneous.** Random splits, fixed chronological tests, rolling date windows, same-window RL evaluation, separate chronological RL tests, and execution backtests all appear in the archive.
+- **Historical filenames are not methodological proof.** A notebook name containing terms such as `walkforward`, `deployable`, `live`, or `ready` reflects the research stage or intended purpose at the time; the implementation must be read to determine the actual evaluation design.
+- **Some strong early metrics belong to exploratory designs.** The approximately 99.1% Random Forest classification accuracy, for example, comes from a random-split stage and should not be generalized into a trading-performance claim.
+- **Mixed and negative evidence is part of the record.** The PPO 43/212 result, weak SAC performance, and other unstable outcomes are retained because they influenced the direction of later work.
+- **One rolling RF/XGBoost notebook contains temporary random-signal simulation.** Portfolio metrics created after that substitution are not model-attributable results.
+- **Legacy summary tables are not treated as independently verified.** Exact LightGBM/XGBoost headline values previously shown in this overview are not uniquely traceable to preserved notebook outputs in the current archive and are therefore omitted here.
+- **Generalization was not established by the historical archive.** Execution constraints, filtering, risk controls, and repeated experiments may improve realism, but they do not by themselves prove protection against overfitting.
+- **Deployment readiness was not established.** QuantConnect, Alpaca, external-signal, and paper/live-oriented notebooks document integration research and execution prototypes rather than validated production deployment.
+- **The repository is primarily a notebook-based historical workspace.** It should not be interpreted through the obsolete modular project-tree and installation instructions that appeared in earlier versions of this document.
 
----
+These limitations do not erase the value of the work. They explain what the preserved experiments can and cannot support and show how the research methodology matured over time.
 
-<img width="1748" height="1094" alt="image" src="https://github.com/user-attachments/assets/a87a09d5-a692-4222-b097-ea9cb529fbaa" />
+## 9. Transition to Successor Research
 
----
+The exploratory archive became the starting point for more structured research rather than the endpoint of the project.
 
-**HD**
-<img width="2156" height="1040" alt="image" src="https://github.com/user-attachments/assets/99778eb5-7a83-4ef4-ae6b-ad28fd79fb88" />
+1. [`exploratory-daytrading`](https://github.com/racoope70/exploratory-daytrading) preserves the early experiments, notebook outputs, modeling ideas, mixed results, and integration prototypes described here.
+2. [`quant-trading-model-validation`](https://github.com/racoope70/quant-trading-model-validation) moved selected work into a more structured validation workflow.
+3. [`ppo-trading-pipeline`](https://github.com/racoope70/ppo-trading-pipeline) developed a later modular implementation and execution-oriented pipeline.
+4. [`quantitative-trading-research-platform`](https://github.com/racoope70/quantitative-trading-research-platform) is the current canonical research platform and carries the project forward under a more controlled reproducibility and validation framework.
 
----
-
-<img width="1738" height="1094" alt="image" src="https://github.com/user-attachments/assets/d4d91149-8c56-4853-bfad-1f27d7032382" />
-
----
-
-**(See Model Risk Disclaimer above)**
-
-**Stored files:**
-- `XGBoost/models/`
-- `XGBoost/scalers/`
-- `XGBoost/features/`
-- `XGBoost/metrics/xgb_best_models_by_score.xlsx`
-
-**Enhancement Phase: Risk-Aware Trading Framework**:
-After baseline backtesting, a complete enhancement phase was initiated across all models.  
-This included:
-1. **Execution & Slippage Simulation**  
-2. **Live Updating / Online Learning**  
-3. **Noise Filtering**  
-4. **Market Regime Detection**  
-5. **Broker Latency Simulation**  
-6. **Risk Management Module**
-
-LightGBM and XGBoost will now be re-tested using this full stack to ensure a fair performance comparison with enhanced PPO, SAC, and TD3 models.
-
-
-###  Model Artifacts
-
-Due to GitHub file size constraints, I only publishing model artifacts (trained XGBoost models, feature JSONs, and result CSVs) for the **top 3 performing stocks** in the walkforward evaluation.
-
-Full results for all 53 tickers were computed and saved locally in Google Drive. These include:
-- Walkforward metrics (Sharpe, Return, Drawdown, F1)
-- SHAP plots
-- Trade signals
-- Final portfolios
-
-If you would like access to the full dataset or models, please contact the author.
-
----
-
-## Real-World Potential & Tangible Benefits  
-
-This project has applications across:
-
-- **Retail Algorithmic Trading**  
-  Run systematic strategies using public stock data and custom features.
-
-- **Quantitative Research**  
-  Rapidly experiment with ML, anomaly detection, and RL to generate trade signals.
-
-- **Portfolio Analysis Tools**  
-  Evaluate strategies using risk-return metrics, overlays, and walkforward simulation.
-
-- **Educational Use Case**  
-  Learn and teach ML + RL in financial market contexts.
-
----
-
-## Further Innovations & Expansion Plans  
-- **Live Testing Support**  
-  Integrate with backtest engines like **RealTest** or platforms like **QuantConnect**.
-
-- **Multi-Agent Reinforcement Learning**  
-  Introduce cooperative agents per asset cluster or sector.
-
-- **Execution Layer**  
-  Add slippage, commission, and market constraints to refine signal realism.
-
-- **AutoML for Strategy Selection**  
-  Compare model types per ticker using dynamic selector logic.
-
-- **Cloud Optimization**  
-  Improve memory usage and GPU utilization for Colab + Drive workflows.
-
----
-
-## License  
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Acknowledgments  
-- **Yahoo Finance** via `yfinance`  
-- **TA-Lib**, `pandas_ta`, `scikit-learn`, `xgboost`, `lightgbm`, `stable-baselines3`  
-- **OpenAI Gym** for reinforcement learning environments  
-- **Google Colab** and **GitHub** for dev environment support  
-- Thanks to all community contributors!
+The historical value of this repository is therefore not that every experiment reached the same methodological standard. Its value is that it preserves the sequence of ideas, implementations, outputs, failures, mixed findings, and evaluation changes that informed the later research architecture.
