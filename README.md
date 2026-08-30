@@ -25,7 +25,7 @@ The repository should be read as a historical research workspace, not as a curre
 
 ## Start Here
 
-For a deeper methodology-and-results narrative, see the [Historical Quantitative Research Overview](./Day_Trading_ML_Overview.md).
+For a deeper methodology-and-results narrative, see the [Historical Quantitative Research Overview](./Historical_Quantitative_Research_Overview.md).
 
 The repository is iterative rather than perfectly linear. For one evidence-based path through the research, start with these notebooks:
 
